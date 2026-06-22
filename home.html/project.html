@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Glowing Card</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    background:#0f172a;
+}
+
+.card{
+    position:relative;
+    width:320px;
+    height:420px;
+    background:#111827;
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.5s;
+    transform-style:preserve-3d;
+    cursor:pointer;
+}
+
+.card:hover{
+    transform:rotateY(15deg) rotateX(10deg) scale(1.05);
+}
+
+.card::before{
+    content:'';
+    position:absolute;
+    inset:-5px;
+    background:linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
+    background-size:400%;
+    animation:glow 8s linear infinite;
+    z-index:-1;
+}
+
+@keyframes glow{
+    0%{background-position:0 0;}
+    50%{background-position:400% 0;}
+    100%{background-position:0 0;}
+}
+
+.content{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+h1{
+    font-size:2rem;
+    margin-bottom:15px;
+}
+
+p{
+    color:#cbd5e1;
+    line-height:1.6;
+}
+
+button{
+    margin-top:25px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:#00ffd5;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:white;
+    transform:scale(1.1);
+}
+
+.icon{
+    font-size:80px;
+    margin-bottom:15px;
+    animation:float 2s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <div class="content">
+        <div class="icon">🚀</div>
+        <h1>Future Ready</h1>
+        <p>
+            Explore creativity with pure HTML & CSS.
+            Hover over this card and watch the magic happen!
+        </p>
+        <button onclick="alert('Welcome to the Future! 🚀')">
+            Launch
+        </button>
+    </div>
+</div>
+
+</body>
+</html>
