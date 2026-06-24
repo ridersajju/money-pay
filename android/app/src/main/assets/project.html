@@ -2,12 +2,6 @@
 <html lang="en">
 
 <head>
-    <script>
-        // Immediate authentication check to avoid content flashing
-        if (localStorage.getItem('isLoggedIn') !== 'true') {
-            window.location.href = './login.html';
-        }
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Money Pay - Monthly Expense Tracker</title>
@@ -96,78 +90,6 @@
             color: var(--text-muted);
             font-size: 1.1rem;
             font-weight: 300;
-        }
-
-        /* User Profile & Logout styling */
-        .user-profile-badge {
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(17, 24, 39, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--border-neon);
-            border-radius: 30px;
-            padding: 6px 16px;
-            font-size: 0.85rem;
-            color: var(--text-main);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
-
-        .user-profile-badge:hover {
-            border-color: var(--border-neon-active);
-            box-shadow: 0 4px 20px rgba(0, 255, 213, 0.15);
-        }
-
-        .user-profile-badge span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-            max-width: 180px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .user-profile-badge span i {
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-
-        .btn-logout {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            outline: none;
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-            padding-left: 10px;
-        }
-
-        .btn-logout:hover {
-            color: var(--danger);
-            transform: scale(1.1);
-            text-shadow: 0 0 10px rgba(238, 82, 83, 0.5);
-        }
-
-        @media (max-width: 768px) {
-            .user-profile-badge {
-                position: static;
-                margin: 0 auto 15px auto;
-                width: max-content;
-            }
         }
 
         @keyframes pulse-glow {
@@ -823,11 +745,6 @@
         .toast.toast-success {
             border-left-color: var(--success);
         }
-
-        #yearly-trend-year:focus, #yearly-trend-year:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(0, 255, 213, 0.2);
-        }
     </style>
 </head>
 
@@ -836,12 +753,6 @@
     <div class="container">
         <!-- Main Title Header -->
         <header>
-            <div class="user-profile-badge" id="user-profile-badge">
-                <span id="user-display-email"><i class="fa-solid fa-user-circle"></i> user@example.com</span>
-                <button id="btn-logout" class="btn-logout" title="Logout">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </button>
-            </div>
             <h1><i class="fa-solid fa-wallet"></i> Money Pay</h1>
             <p>Sleek Spending Calculator & Monthly Expense Insights</p>
         </header>
@@ -1103,26 +1014,6 @@
 
             </div>
         </div>
-
-        <!-- Yearly Spending Trend Analysis -->
-        <div class="glass-card" style="width: 100%;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px; border-bottom: 1px solid rgba(0, 255, 213, 0.1); padding-bottom: 12px;">
-                <h2 style="border-bottom: none; margin-bottom: 0; padding-bottom: 0; display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-chart-column"></i> Yearly Expenditure Trends</h2>
-                <div class="input-wrapper" style="width: auto; margin-bottom: 0; display: flex; align-items: center;">
-                    <select id="yearly-trend-year" style="padding: 8px 12px; padding-left: 35px; font-size: 0.9rem; border-radius: 8px; border: 1px solid var(--border-neon); background: rgba(15, 23, 42, 0.8); color: #fff; cursor: pointer; outline: none; transition: border-color 0.3s;">
-                        <!-- Dynamic options loaded via JS -->
-                    </select>
-                    <i class="fa-solid fa-calendar-days" style="position: absolute; left: 12px; color: var(--text-muted); font-size: 0.95rem;"></i>
-                </div>
-            </div>
-            <div class="yearly-chart-container" style="position: relative; height: 320px; width: 100%;">
-                <canvas id="yearlyTrendChart"></canvas>
-                <div id="yearly-chart-fallback" class="empty-state" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; justify-content: center; align-items: center; flex-direction: column;">
-                    <i class="fa-solid fa-chart-bar" style="font-size: 3rem; color: rgba(255,255,255,0.05); margin-bottom: 10px;"></i>
-                    <p style="color: var(--text-muted);">No records found for the selected year.</p>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Toast elements -->
@@ -1157,10 +1048,8 @@
         let budgets = {}; // key: YYYY-MM, value: number
         let currentYearMonth = ""; // format YYYY-MM
         let chartInstance = null;
-        let yearlyTrendChartInstance = null;
 
         // DOM elements
-        const yearlyTrendYearSelect = document.getElementById('yearly-trend-year');
         const monthSelector = document.getElementById('month-selector');
         const prevMonthBtn = document.getElementById('prev-month-btn');
         const nextMonthBtn = document.getElementById('next-month-btn');
@@ -1247,29 +1136,6 @@
 
             btnExport.addEventListener('click', exportToCSV);
             btnClearAll.addEventListener('click', clearAllWorkspaceData);
-
-            if (yearlyTrendYearSelect) {
-                yearlyTrendYearSelect.addEventListener('change', () => {
-                    updateYearlyTrendChart();
-                });
-            }
-
-            // Display logged in user email
-            const userEmail = localStorage.getItem('userEmail') || 'user@example.com';
-            const userDisplay = document.getElementById('user-display-email');
-            if (userDisplay) {
-                userDisplay.innerHTML = `<i class="fa-solid fa-user-circle"></i> ${userEmail}`;
-            }
-
-            // Logout click handler
-            const logoutBtn = document.getElementById('btn-logout');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', () => {
-                    localStorage.removeItem('isLoggedIn');
-                    localStorage.removeItem('userEmail');
-                    window.location.href = './login.html';
-                });
-            }
         });
 
         // Initialize 12 months in the dropdown (6 months past, current, 5 months future)
@@ -1510,10 +1376,6 @@
 
             // 6. Render Transaction Registry List
             renderTransactionsListOnly();
-
-            // 7. Update Yearly Trends
-            updateYearlySelector();
-            updateYearlyTrendChart();
         }
 
         // Render transactions list with search and filters active
@@ -1740,219 +1602,6 @@
                     }
                 };
                 chartInstance = new Chart(chartCanvas, config);
-            }
-        }
-
-        // Manage options inside the year trend select dropdown
-        function updateYearlySelector() {
-            if (!yearlyTrendYearSelect) return;
-
-            // Extract current viewed year
-            const currentYear = currentYearMonth.substring(0, 4);
-
-            // Find all unique years
-            const yearsSet = new Set();
-            yearsSet.add(currentYear);
-
-            expenses.forEach(exp => {
-                if (exp.date && exp.date.length >= 4) {
-                    const yr = exp.date.substring(0, 4);
-                    if (!isNaN(yr)) yearsSet.add(yr);
-                }
-            });
-
-            const sortedYears = Array.from(yearsSet).sort((a, b) => b - a);
-
-            // Check if options are already correct to avoid resetting dropdown
-            const currentOptions = Array.from(yearlyTrendYearSelect.options).map(o => o.value);
-            const optionsMatch = currentOptions.length === sortedYears.length && currentOptions.every((v, i) => v === sortedYears[i]);
-
-            if (!optionsMatch) {
-                const previousValue = yearlyTrendYearSelect.value;
-                yearlyTrendYearSelect.innerHTML = "";
-                sortedYears.forEach(yr => {
-                    const opt = document.createElement('option');
-                    opt.value = yr;
-                    opt.textContent = yr;
-                    yearlyTrendYearSelect.appendChild(opt);
-                });
-                // Try to restore previous selection or default to current year
-                if (sortedYears.includes(previousValue)) {
-                    yearlyTrendYearSelect.value = previousValue;
-                } else {
-                    yearlyTrendYearSelect.value = currentYear;
-                }
-            } else if (!yearlyTrendYearSelect.value) {
-                yearlyTrendYearSelect.value = currentYear;
-            }
-        }
-
-        // Render Yearly trend bars and line graph
-        function updateYearlyTrendChart() {
-            const chartCanvas = document.getElementById('yearlyTrendChart');
-            const fallbackEl = document.getElementById('yearly-chart-fallback');
-            if (!chartCanvas || !yearlyTrendYearSelect) return;
-
-            const selectedYear = yearlyTrendYearSelect.value;
-            if (!selectedYear) {
-                chartCanvas.style.display = 'none';
-                fallbackEl.style.display = 'flex';
-                return;
-            }
-
-            // Initialize arrays for 12 months
-            const monthlySpent = new Array(12).fill(0);
-            const monthlyBudget = new Array(12).fill(0);
-
-            // Sum expenses by month
-            expenses.forEach(exp => {
-                if (exp.date && exp.date.startsWith(selectedYear)) {
-                    const parts = exp.date.split('-');
-                    if (parts.length >= 2) {
-                        const monthIdx = parseInt(parts[1], 10) - 1;
-                        if (monthIdx >= 0 && monthIdx < 12) {
-                            monthlySpent[monthIdx] += exp.amount;
-                        }
-                    }
-                }
-            });
-
-            // Read budgets by month
-            let hasBudgetsOrExpenses = false;
-            for (let m = 0; m < 12; m++) {
-                const padMonth = String(m + 1).padStart(2, '0');
-                const key = `${selectedYear}-${padMonth}`;
-                monthlyBudget[m] = budgets[key] || 0;
-
-                if (monthlySpent[m] > 0 || monthlyBudget[m] > 0) {
-                    hasBudgetsOrExpenses = true;
-                }
-            }
-
-            // If no data to show, display empty fallback
-            if (!hasBudgetsOrExpenses) {
-                chartCanvas.style.display = 'none';
-                fallbackEl.style.display = 'flex';
-                if (yearlyTrendChartInstance) {
-                    yearlyTrendChartInstance.destroy();
-                    yearlyTrendChartInstance = null;
-                }
-                return;
-            }
-
-            chartCanvas.style.display = 'block';
-            fallbackEl.style.display = 'none';
-
-            const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-            if (yearlyTrendChartInstance) {
-                // Update data
-                yearlyTrendChartInstance.data.datasets[0].data = monthlySpent;
-                yearlyTrendChartInstance.data.datasets[1].data = monthlyBudget;
-                yearlyTrendChartInstance.update();
-            } else {
-                // Create new chart instance
-                const config = {
-                    type: 'bar',
-                    data: {
-                        labels: monthLabels,
-                        datasets: [
-                            {
-                                label: 'Spent Amount',
-                                data: monthlySpent,
-                                backgroundColor: 'rgba(0, 255, 213, 0.4)',
-                                borderColor: '#00ffd5',
-                                borderWidth: 1.5,
-                                borderRadius: 6,
-                                order: 2
-                            },
-                            {
-                                label: 'Budget Limit',
-                                data: monthlyBudget,
-                                type: 'line',
-                                borderColor: '#f1c40f',
-                                borderWidth: 2,
-                                pointBackgroundColor: '#f1c40f',
-                                pointHoverBackgroundColor: '#ffffff',
-                                pointRadius: 4,
-                                fill: false,
-                                tension: 0.3,
-                                order: 1
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                grid: {
-                                    color: 'rgba(255, 255, 255, 0.05)',
-                                    drawBorder: false
-                                },
-                                ticks: {
-                                    color: '#94a3b8',
-                                    font: {
-                                        family: "'Inter', sans-serif",
-                                        size: 11
-                                    },
-                                    callback: function (value) {
-                                        if (value >= 1000) {
-                                            return '₹' + (value / 1000) + 'k';
-                                        }
-                                        return '₹' + value;
-                                    }
-                                }
-                            },
-                            x: {
-                                grid: {
-                                    display: false
-                                },
-                                ticks: {
-                                    color: '#94a3b8',
-                                    font: {
-                                        family: "'Inter', sans-serif",
-                                        size: 11
-                                    }
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: true,
-                                position: 'top',
-                                labels: {
-                                    color: '#e2e8f0',
-                                    font: {
-                                        family: "'Inter', sans-serif",
-                                        size: 12
-                                    },
-                                    padding: 15,
-                                    usePointStyle: true,
-                                    boxWidth: 8
-                                }
-                            },
-                            tooltip: {
-                                backgroundColor: '#1e293b',
-                                titleColor: '#ffffff',
-                                bodyColor: '#e2e8f0',
-                                borderColor: 'rgba(0, 255, 213, 0.2)',
-                                borderWidth: 1,
-                                padding: 12,
-                                cornerRadius: 8,
-                                callbacks: {
-                                    label: function (context) {
-                                        const label = context.dataset.label || '';
-                                        const value = context.raw || 0;
-                                        return ` ${label}: ₹${value.toLocaleString('en-IN')}`;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                };
-                yearlyTrendChartInstance = new Chart(chartCanvas, config);
             }
         }
 

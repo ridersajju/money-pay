@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_expenses"
+        android:icon="@drawable/ic_wallet"
+        android:title="Expenses" />
+    <item
+        android:id="@+id/nav_payments"
+        android:icon="@drawable/ic_payment"
+        android:title="Payments" />
+    <item
+        android:id="@+id/nav_delivery"
+        android:icon="@drawable/ic_delivery"
+        android:title="Delivery" />
+</menu>

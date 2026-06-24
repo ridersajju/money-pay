@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <script>
         // Immediate authentication check to avoid content flashing
@@ -11,15 +10,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Money Pay - Monthly Expense Tracker</title>
-
+    
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -33,7 +32,7 @@
             --border-neon-active: rgba(0, 255, 213, 0.6);
             --text-main: #e2e8f0;
             --text-muted: #94a3b8;
-
+            
             --success: #10ac84;
             --warning: #f1c40f;
             --danger: #ee5253;
@@ -171,13 +170,10 @@
         }
 
         @keyframes pulse-glow {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: scale(1);
                 text-shadow: 0 0 10px rgba(0, 255, 213, 0.4);
             }
-
             50% {
                 transform: scale(1.1);
                 text-shadow: 0 0 25px rgba(0, 255, 213, 0.9);
@@ -205,10 +201,12 @@
             left: -50%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right,
-                    transparent,
-                    rgba(255, 255, 255, 0.03),
-                    transparent);
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(255, 255, 255, 0.03),
+                transparent
+            );
             transform: skewX(-25deg);
             transition: 0.75s;
             pointer-events: none;
@@ -372,9 +370,7 @@
             pointer-events: none;
         }
 
-        input,
-        select,
-        textarea {
+        input, select, textarea {
             width: 100%;
             padding: 12px 15px 12px 42px;
             background: rgba(15, 23, 42, 0.6);
@@ -386,16 +382,13 @@
             transition: all 0.3s;
         }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
+        input:focus, select:focus, textarea:focus {
             border-color: var(--primary);
             box-shadow: 0 0 15px rgba(0, 255, 213, 0.25);
             background: rgba(0, 255, 213, 0.03);
         }
 
-        input:focus+i,
-        select:focus~i {
+        input:focus + i, select:focus ~ i {
             color: var(--primary);
         }
 
@@ -556,7 +549,7 @@
         .select-filter {
             width: 180px;
         }
-
+        
         .select-filter select {
             padding-left: 15px;
         }
@@ -629,8 +622,7 @@
             align-items: center;
             gap: 15px;
             flex: 1;
-            min-width: 0;
-            /* allows text truncation */
+            min-width: 0; /* allows text truncation */
         }
 
         .tx-icon-box {
@@ -643,7 +635,7 @@
             font-size: 1.1rem;
             color: #ffffff;
             flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .tx-details {
@@ -803,7 +795,7 @@
             background: #1e293b;
             color: #ffffff;
             border-left: 4px solid var(--primary);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
             gap: 12px;
@@ -830,7 +822,6 @@
         }
     </style>
 </head>
-
 <body>
 
     <div class="container">
@@ -864,7 +855,7 @@
 
         <!-- Dashboard Summary stats -->
         <div class="dashboard-grid">
-
+            
             <!-- Budget Card -->
             <div class="glass-card stat-card" id="budget-card">
                 <div class="stat-icon"><i class="fa-solid fa-coins"></i></div>
@@ -925,30 +916,28 @@
 
         <!-- Main Workspace (Forms, Visual Charts and List) -->
         <div class="main-workspace">
-
+            
             <!-- Left Side: Controls & Input Panel -->
             <div class="flex-column" style="display: flex; flex-direction: column; gap: 24px;">
-
+                
                 <!-- Set Budget Tool -->
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-sliders"></i> Adjust Budget Limit</h2>
                     <form id="budget-form" class="budget-config-form">
                         <div class="form-group" style="flex: 1; margin-bottom: 0;">
                             <div class="input-wrapper">
-                                <input type="number" id="budget-input" placeholder="Enter target budget (₹)" min="0"
-                                    required>
+                                <input type="number" id="budget-input" placeholder="Enter target budget (₹)" min="0" required>
                                 <i class="fa-solid fa-indian-rupee-sign"></i>
                             </div>
                         </div>
-                        <button type="submit" style="width: auto; padding: 12px 20px;"><i
-                                class="fa-solid fa-floppy-disk"></i> Update</button>
+                        <button type="submit" style="width: auto; padding: 12px 20px;"><i class="fa-solid fa-floppy-disk"></i> Update</button>
                     </form>
                 </div>
 
                 <!-- Expense Input Form -->
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-circle-plus"></i> Record Expense</h2>
-
+                    
                     <form id="expense-form">
                         <div class="form-group">
                             <label for="exp-amount">Amount</label>
@@ -988,16 +977,14 @@
                         <div class="form-group">
                             <label for="exp-desc">Description</label>
                             <div class="input-wrapper">
-                                <input type="text" id="exp-desc" placeholder="e.g. Weekly grocery, Gym membership"
-                                    required maxlength="80">
+                                <input type="text" id="exp-desc" placeholder="e.g. Weekly grocery, Gym membership" required maxlength="80">
                                 <i class="fa-solid fa-pen-nib"></i>
                             </div>
                         </div>
 
                         <div class="button-group">
                             <button type="submit"><i class="fa-solid fa-check"></i> Add Outflow</button>
-                            <button type="reset" class="btn-outline" title="Clear Form"><i
-                                    class="fa-solid fa-arrow-rotate-left"></i> Reset</button>
+                            <button type="reset" class="btn-outline" title="Clear Form"><i class="fa-solid fa-arrow-rotate-left"></i> Reset</button>
                         </div>
                     </form>
                 </div>
@@ -1005,14 +992,13 @@
 
             <!-- Right Side: Visual Reports & Transactions List -->
             <div class="flex-column" style="display: flex; flex-direction: column; gap: 24px;">
-
+                
                 <!-- Category Share Chart & Insights Grid -->
                 <div class="glass-card" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div style="grid-column: span 2;">
-                        <h2 style="margin-bottom: 10px;"><i class="fa-solid fa-chart-pie"></i> Share Analysis & Smart
-                            Insights</h2>
+                        <h2 style="margin-bottom: 10px;"><i class="fa-solid fa-chart-pie"></i> Share Analysis & Smart Insights</h2>
                     </div>
-
+                    
                     <div class="chart-box">
                         <canvas id="categoryChart"></canvas>
                         <div id="chart-fallback" class="empty-state" style="position: absolute; display: none;">
@@ -1024,28 +1010,23 @@
                     <div style="display: flex; flex-direction: column; justify-content: center; gap: 10px;">
                         <div class="insight-box" style="margin-top: 0;">
                             <div class="insight-item">
-                                <i id="insight-status-icon" class="fa-solid fa-circle-info"
-                                    style="background: rgba(0, 255, 213, 0.1); color: var(--primary);"></i>
+                                <i id="insight-status-icon" class="fa-solid fa-circle-info" style="background: rgba(0, 255, 213, 0.1); color: var(--primary);"></i>
                                 <div class="insight-text">
                                     <div class="insight-title">Spending Health</div>
-                                    <div class="insight-desc" id="insight-health-desc">Add spending items to evaluate
-                                        monthly budget health.</div>
+                                    <div class="insight-desc" id="insight-health-desc">Add spending items to evaluate monthly budget health.</div>
                                 </div>
                             </div>
-
+                            
                             <div class="insight-item">
-                                <i class="fa-solid fa-arrow-trend-up"
-                                    style="background: rgba(10, 189, 227, 0.1); color: var(--info);"></i>
+                                <i class="fa-solid fa-arrow-trend-up" style="background: rgba(10, 189, 227, 0.1); color: var(--info);"></i>
                                 <div class="insight-text">
                                     <div class="insight-title">Highest Outflow</div>
-                                    <div class="insight-desc" id="insight-top-category">No expenses registered yet.
-                                    </div>
+                                    <div class="insight-desc" id="insight-top-category">No expenses registered yet.</div>
                                 </div>
                             </div>
 
                             <div class="insight-item">
-                                <i class="fa-solid fa-calculator"
-                                    style="background: rgba(241, 196, 15, 0.1); color: var(--warning);"></i>
+                                <i class="fa-solid fa-calculator" style="background: rgba(241, 196, 15, 0.1); color: var(--warning);"></i>
                                 <div class="insight-text">
                                     <div class="insight-title">Daily Spending Avg</div>
                                     <div class="insight-desc" id="insight-daily-avg">₹0.00 / day</div>
@@ -1058,14 +1039,14 @@
                 <!-- Transaction History panel -->
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-history"></i> Outflow Registry</h2>
-
+                    
                     <!-- Search, filter and actions toolbars -->
                     <div class="filters-toolbar">
                         <div class="search-filter">
                             <input type="text" id="search-input" placeholder="Search by description...">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
-
+                        
                         <div class="select-filter">
                             <div class="input-wrapper">
                                 <select id="filter-category" style="padding-left: 15px;">
@@ -1084,12 +1065,10 @@
                         </div>
 
                         <div class="actions-toolbar">
-                            <button id="btn-export" class="btn-outline" style="padding: 10px 14px;"
-                                title="Export Current Month to CSV">
+                            <button id="btn-export" class="btn-outline" style="padding: 10px 14px;" title="Export Current Month to CSV">
                                 <i class="fa-solid fa-file-csv"></i> Export
                             </button>
-                            <button id="btn-clear-all" class="btn-danger" style="padding: 10px 14px;"
-                                title="Clear All Workspace Data">
+                            <button id="btn-clear-all" class="btn-danger" style="padding: 10px 14px;" title="Clear All Workspace Data">
                                 <i class="fa-solid fa-trash-can"></i> Clear All
                             </button>
                         </div>
@@ -1164,32 +1143,32 @@
         const monthSelector = document.getElementById('month-selector');
         const prevMonthBtn = document.getElementById('prev-month-btn');
         const nextMonthBtn = document.getElementById('next-month-btn');
-
+        
         const statBudget = document.getElementById('stat-budget');
         const statSpent = document.getElementById('stat-spent');
         const statBalance = document.getElementById('stat-balance');
         const statSavingsRate = document.getElementById('stat-savings-rate');
-
+        
         const budgetProgress = document.getElementById('budget-progress');
         const budgetMetaTxt = document.getElementById('budget-meta-txt');
         const balanceMeta = document.getElementById('stat-balance-meta');
-
+        
         const budgetInput = document.getElementById('budget-input');
         const budgetForm = document.getElementById('budget-form');
-
+        
         const expenseForm = document.getElementById('expense-form');
         const expAmount = document.getElementById('exp-amount');
         const expCategory = document.getElementById('exp-category');
         const expDate = document.getElementById('exp-date');
         const expDesc = document.getElementById('exp-desc');
-
+        
         const searchInput = document.getElementById('search-input');
         const filterCategory = document.getElementById('filter-category');
         const transactionList = document.getElementById('transaction-list');
-
+        
         const btnExport = document.getElementById('btn-export');
         const btnClearAll = document.getElementById('btn-clear-all');
-
+        
         // Insights
         const insightHealthDesc = document.getElementById('insight-health-desc');
         const insightStatusIcon = document.getElementById('insight-status-icon');
@@ -1215,36 +1194,36 @@
             const month = String(today.getMonth() + 1).padStart(2, '0');
             const day = String(today.getDate()).padStart(2, '0');
             expDate.value = `${year}-${month}-${day}`;
-
+            
             initTimeframeOptions();
             loadStateFromStorage();
-
+            
             // Set up current selection
             currentYearMonth = `${year}-${month}`;
             monthSelector.value = currentYearMonth;
-
+            
             // If empty, preload with mock data
             if (expenses.length === 0) {
                 preloadMockData(year, month);
             }
-
+            
             renderDashboard();
-
+            
             // Listeners
             monthSelector.addEventListener('change', (e) => {
                 currentYearMonth = e.target.value;
                 renderDashboard();
             });
-
+            
             prevMonthBtn.addEventListener('click', () => changeMonthOffset(-1));
             nextMonthBtn.addEventListener('click', () => changeMonthOffset(1));
-
+            
             budgetForm.addEventListener('submit', handleBudgetSubmit);
             expenseForm.addEventListener('submit', handleExpenseSubmit);
-
+            
             searchInput.addEventListener('input', renderTransactionsListOnly);
             filterCategory.addEventListener('change', renderTransactionsListOnly);
-
+            
             btnExport.addEventListener('click', exportToCSV);
             btnClearAll.addEventListener('click', clearAllWorkspaceData);
 
@@ -1277,17 +1256,17 @@
             monthSelector.innerHTML = "";
             const today = new Date();
             const list = [];
-
+            
             for (let i = -12; i <= 6; i++) {
                 const date = new Date(today.getFullYear(), today.getMonth() + i, 1);
                 const year = date.getFullYear();
                 const month = String(date.getMonth() + 1).padStart(2, '0');
                 const label = date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
                 const value = `${year}-${month}`;
-
+                
                 list.push({ value, label });
             }
-
+            
             list.forEach(item => {
                 const opt = document.createElement('option');
                 opt.value = item.value;
@@ -1312,7 +1291,7 @@
             try {
                 const storedExpenses = localStorage.getItem('money_pay_expenses');
                 const storedBudgets = localStorage.getItem('money_pay_budgets');
-
+                
                 if (storedExpenses) expenses = JSON.parse(storedExpenses);
                 if (storedBudgets) budgets = JSON.parse(storedBudgets);
             } catch (error) {
@@ -1328,15 +1307,15 @@
 
         function preloadMockData(year, month) {
             const padMonth = String(month).padStart(2, '0');
-
+            
             // Set standard budget
             budgets[`${year}-${padMonth}`] = 45000;
-
+            
             // Re-allocate dates in sample data to target current month
             sampleExpenses.forEach((exp, idx) => {
                 const dayNumber = Math.min(28, (idx * 4) + 2); // Spread across days
                 const padDay = String(dayNumber).padStart(2, '0');
-
+                
                 expenses.push({
                     id: `mock-${Date.now()}-${idx}`,
                     amount: exp.amount,
@@ -1345,7 +1324,7 @@
                     description: exp.description
                 });
             });
-
+            
             saveStateToStorage();
             showToast("Preloaded dashboard with mock transactions!", "success");
         }
@@ -1358,7 +1337,7 @@
                 showToast("Please enter a valid budget limit.", "error");
                 return;
             }
-
+            
             budgets[currentYearMonth] = limit;
             saveStateToStorage();
             budgetInput.value = "";
@@ -1405,7 +1384,7 @@
             expAmount.value = "";
             expCategory.value = "";
             expDesc.value = "";
-
+            
             // Check if added transaction is for the currently viewed month, adjust focus if not
             const transactionYearMonth = date.substring(0, 7);
             if (transactionYearMonth !== currentYearMonth) {
@@ -1450,7 +1429,7 @@
             const totalBudget = budgets[currentYearMonth] || 0;
             const totalSpent = monthExpenses.reduce((sum, exp) => sum + exp.amount, 0);
             const balance = totalBudget - totalSpent;
-
+            
             // Savings rate calculation: percentage of budget unused
             let savingsRate = 0;
             if (totalBudget > 0) {
@@ -1460,7 +1439,7 @@
             // 2. Render Cards Numbers
             statBudget.textContent = currencyFormatter.format(totalBudget);
             statSpent.textContent = currencyFormatter.format(totalSpent);
-
+            
             // Balance text format
             statBalance.textContent = currencyFormatter.format(balance);
             if (balance < 0) {
@@ -1478,7 +1457,7 @@
             if (totalBudget > 0) {
                 budgetPercentage = (totalSpent / totalBudget) * 100;
             }
-
+            
             budgetProgress.style.width = `${Math.min(100, budgetPercentage)}%`;
             budgetMetaTxt.textContent = `${Math.round(budgetPercentage)}% of budget spent`;
 
@@ -1529,8 +1508,8 @@
             }
 
             if (query !== "") {
-                filtered = filtered.filter(exp =>
-                    exp.description.toLowerCase().includes(query) ||
+                filtered = filtered.filter(exp => 
+                    exp.description.toLowerCase().includes(query) || 
                     exp.amount.toString().includes(query)
                 );
             }
@@ -1551,7 +1530,7 @@
 
             transactionList.innerHTML = filtered.map(exp => {
                 const catInfo = CATEGORIES[exp.category] || { icon: "fa-question", color: "#8395a7", bg: "rgba(131,149,167,0.1)" };
-
+                
                 // Format date nicely (e.g. 23 Jun 2026)
                 const dObj = new Date(exp.date);
                 const formattedDate = isNaN(dObj.getTime()) ? exp.date : dObj.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
@@ -1631,7 +1610,7 @@
                     topCat = cat;
                 }
             }
-
+            
             const catShare = spent > 0 ? Math.round((topAmt / spent) * 100) : 0;
             insightTopCategory.innerHTML = `<span style="color: ${CATEGORIES[topCat]?.color || '#fff'}">${topCat}</span> (<b>₹${topAmt.toLocaleString('en-IN')}</b> - ${catShare}%)`;
 
@@ -1639,7 +1618,7 @@
             // Calculate how many days in the selected month
             const [y, m] = currentYearMonth.split('-').map(Number);
             const daysInMonth = new Date(y, m, 0).getDate();
-
+            
             // Check if selected month is current month, if so divide by current day number for realistic avg
             const today = new Date();
             let divisor = daysInMonth;
@@ -1655,7 +1634,7 @@
         function updateChartBreakdown(monthExpenses) {
             const chartCanvas = document.getElementById('categoryChart');
             const fallbackEl = document.getElementById('chart-fallback');
-
+            
             if (monthExpenses.length === 0) {
                 chartCanvas.style.display = 'none';
                 fallbackEl.style.display = 'flex';
@@ -1673,7 +1652,7 @@
             const dataMap = {};
             // Init keys to maintain order
             Object.keys(CATEGORIES).forEach(cat => dataMap[cat] = 0);
-
+            
             monthExpenses.forEach(exp => {
                 if (dataMap[exp.category] !== undefined) {
                     dataMap[exp.category] += exp.amount;
@@ -1728,7 +1707,7 @@
                             },
                             tooltip: {
                                 callbacks: {
-                                    label: function (context) {
+                                    label: function(context) {
                                         const label = context.label || '';
                                         const value = context.raw || 0;
                                         return ` ${label}: ₹${value.toLocaleString('en-IN')}`;
@@ -1746,27 +1725,27 @@
         // Manage options inside the year trend select dropdown
         function updateYearlySelector() {
             if (!yearlyTrendYearSelect) return;
-
+            
             // Extract current viewed year
             const currentYear = currentYearMonth.substring(0, 4);
-
+            
             // Find all unique years
             const yearsSet = new Set();
             yearsSet.add(currentYear);
-
+            
             expenses.forEach(exp => {
                 if (exp.date && exp.date.length >= 4) {
                     const yr = exp.date.substring(0, 4);
                     if (!isNaN(yr)) yearsSet.add(yr);
                 }
             });
-
+            
             const sortedYears = Array.from(yearsSet).sort((a, b) => b - a);
-
+            
             // Check if options are already correct to avoid resetting dropdown
             const currentOptions = Array.from(yearlyTrendYearSelect.options).map(o => o.value);
             const optionsMatch = currentOptions.length === sortedYears.length && currentOptions.every((v, i) => v === sortedYears[i]);
-
+            
             if (!optionsMatch) {
                 const previousValue = yearlyTrendYearSelect.value;
                 yearlyTrendYearSelect.innerHTML = "";
@@ -1792,18 +1771,18 @@
             const chartCanvas = document.getElementById('yearlyTrendChart');
             const fallbackEl = document.getElementById('yearly-chart-fallback');
             if (!chartCanvas || !yearlyTrendYearSelect) return;
-
+            
             const selectedYear = yearlyTrendYearSelect.value;
             if (!selectedYear) {
                 chartCanvas.style.display = 'none';
                 fallbackEl.style.display = 'flex';
                 return;
             }
-
+            
             // Initialize arrays for 12 months
             const monthlySpent = new Array(12).fill(0);
             const monthlyBudget = new Array(12).fill(0);
-
+            
             // Sum expenses by month
             expenses.forEach(exp => {
                 if (exp.date && exp.date.startsWith(selectedYear)) {
@@ -1816,19 +1795,19 @@
                     }
                 }
             });
-
+            
             // Read budgets by month
             let hasBudgetsOrExpenses = false;
             for (let m = 0; m < 12; m++) {
                 const padMonth = String(m + 1).padStart(2, '0');
                 const key = `${selectedYear}-${padMonth}`;
                 monthlyBudget[m] = budgets[key] || 0;
-
+                
                 if (monthlySpent[m] > 0 || monthlyBudget[m] > 0) {
                     hasBudgetsOrExpenses = true;
                 }
             }
-
+            
             // If no data to show, display empty fallback
             if (!hasBudgetsOrExpenses) {
                 chartCanvas.style.display = 'none';
@@ -1839,12 +1818,12 @@
                 }
                 return;
             }
-
+            
             chartCanvas.style.display = 'block';
             fallbackEl.style.display = 'none';
-
+            
             const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
+            
             if (yearlyTrendChartInstance) {
                 // Update data
                 yearlyTrendChartInstance.data.datasets[0].data = monthlySpent;
@@ -1897,7 +1876,7 @@
                                         family: "'Inter', sans-serif",
                                         size: 11
                                     },
-                                    callback: function (value) {
+                                    callback: function(value) {
                                         if (value >= 1000) {
                                             return '₹' + (value / 1000) + 'k';
                                         }
@@ -1942,7 +1921,7 @@
                                 padding: 12,
                                 cornerRadius: 8,
                                 callbacks: {
-                                    label: function (context) {
+                                    label: function(context) {
                                         const label = context.dataset.label || '';
                                         const value = context.raw || 0;
                                         return ` ${label}: ₹${value.toLocaleString('en-IN')}`;
@@ -1989,19 +1968,19 @@
         // --- UI UTILS ---
         function escapeHtml(unsafe) {
             return unsafe
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
         }
 
         function showToast(message, type = "info") {
             const toast = document.getElementById('toast');
             const toastMsg = document.getElementById('toast-message');
-
+            
             toastMsg.textContent = message;
-
+            
             // Set styles based on type
             toast.className = 'toast show';
             if (type === 'error') {
@@ -2020,5 +1999,4 @@
         }
     </script>
 </body>
-
 </html>

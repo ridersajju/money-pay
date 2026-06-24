@@ -1,0 +1,24 @@
+{
+  "name": "Money Pay Expense Tracker",
+  "short_name": "Money Pay",
+  "description": "Sleek Spending Calculator & Monthly Expense Insights",
+  "start_url": "./monthly-spend.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#00ffd5",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}
